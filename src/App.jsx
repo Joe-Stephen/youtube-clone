@@ -1,8 +1,14 @@
+import Head from "./components/Head";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Body from "./components/Body";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-xl text-red-600">Youtube Clone</h1>
-    </div>
+    <Provider store={store}>
+      <Head />
+      <Body />
+    </Provider>
   );
 }
 
