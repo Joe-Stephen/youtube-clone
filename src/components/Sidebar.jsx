@@ -10,6 +10,7 @@ import {
   IconMovie,
 } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
@@ -19,7 +20,10 @@ const Sidebar = () => {
       {isMenuOpen && (
         <div className="p-5 shadow-lg w-48">
           <ul>
-            <li className="flex">{<IconHome stroke={2} />}Home</li>
+            <li className="flex">
+              {<IconHome stroke={2} />}
+              <Link to={"/"}>Home</Link>
+            </li>
             <li className="flex">{<IconDeviceTv />}Shorts</li>
             <li className="flex">{<IconVideo />}Videos</li>
             <li className="flex">{<IconLivePhoto />}Live</li>

@@ -18,7 +18,7 @@ const Head = () => {
           src={HAMBURGER_ICON}
           alt="hamburger-icon"
         />
-        <a href="">
+        <a href="#">
           <img className="h-5 mx-2" src={YOUTUBE_LOGO} alt="youtube-logo" />
         </a>
       </div>
