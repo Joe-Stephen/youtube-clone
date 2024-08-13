@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { closeMenu, toggleMenu } from "../utils/appSlice";
+import { useDispatch } from "react-redux";
+import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import {
   YOUTUBE_WATCH_URL_POSTFIX,
   YOUTUBE_WATCH_URL_PREFIX,
-  YOUTUBE_WATCH_VIDEO_URL,
 } from "../utils/constants";
 
 const WatchPage = () => {
