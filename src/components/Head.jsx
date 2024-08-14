@@ -1,13 +1,33 @@
-import React from "react";
-import { HAMBURGER_ICON, USER_ICON, YOUTUBE_LOGO } from "../utils/constants";
+import React, { useEffect, useState } from "react";
+import {
+  HAMBURGER_ICON,
+  USER_ICON,
+  YOUTUBE_LOGO,
+  YOUTUBE_SEARCH_API,
+} from "../utils/constants";
 import { IoIosSearch } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSearchSuggestions(), 200);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
+  };
+  const getSearchSuggestions = async () => {
+    console.log("API called! ", searchQuery);
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    console.log("json :", json[1]);
   };
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
@@ -22,15 +42,30 @@ const Head = () => {
           <img className="h-5 mx-2" src={YOUTUBE_LOGO} alt="youtube-logo" />
         </a>
       </div>
-      <div className="flex col-span-10 px-10">
-        <input
-          className="pl-4 w-1/2 border-l border-t border-b border-gray-400 rounded-s-full"
-          type="text"
-          placeholder="Search"
-        />
-        <button className="border-l border-t border-b border-r bg-gray-200 border-gray-400 py-1 px-4 rounded-r-full">
-          {<IoIosSearch />}
-        </button>
+      <div className="col-span-10 px-10">
+        <div>
+          <input
+            className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search"
+          />
+          <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
+            🔍
+          </button>
+        </div>
+        <div className="z-10 fixed bg-white  py-2 px-2 w-[29.5rem] shadow-lg rounded-lg border border-gray-100">
+          <ul>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
+          </ul>
+        </div>
       </div>
       <div className="flex col-span-1">
         <img className="h-8" src={USER_ICON} alt="user-icon" />

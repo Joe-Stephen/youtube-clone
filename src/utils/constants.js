@@ -7,3 +7,6 @@ export const USER_ICON =
 export const YOUTUBE_VIDEOS_LIST_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=`;
 export const YOUTUBE_WATCH_URL_PREFIX = "https://www.youtube.com/embed/";
 export const YOUTUBE_WATCH_URL_POSTFIX = "?&autoplay=1&mute=1";
+export const YOUTUBE_SEARCH_API =
+  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  
