@@ -5,12 +5,13 @@ import {
   YOUTUBE_LOGO,
   YOUTUBE_SEARCH_API,
 } from "../utils/constants";
-import { IoIosSearch } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => getSearchSuggestions(), 200);
@@ -24,10 +25,9 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   const getSearchSuggestions = async () => {
-    console.log("API called! ", searchQuery);
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log("json :", json[1]);
+    setSuggestions(json[1]);
   };
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
@@ -50,22 +50,28 @@ const Head = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setShowSuggestions(false)}
           />
           <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
             🔍
           </button>
         </div>
-        <div className="z-10 fixed bg-white  py-2 px-2 w-[29.5rem] shadow-lg rounded-lg border border-gray-100">
-          <ul>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-            <li className="py-2 -px-10 shadow-sm hover:bg-gray-100">🔍phone</li>
-          </ul>
-        </div>
+        {showSuggestions && (
+          <div className="z-10 absolute bg-white  py-2 px-2 w-[29.5rem] shadow-lg rounded-lg border border-gray-100">
+            <ul>
+              {suggestions.length > 0 &&
+                suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className="py-2 -px-10 shadow-sm hover:bg-gray-100"
+                  >
+                    🔍{suggestion}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="flex col-span-1">
         <img className="h-8" src={USER_ICON} alt="user-icon" />

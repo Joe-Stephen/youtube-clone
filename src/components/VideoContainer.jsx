@@ -12,10 +12,8 @@ const VideoContainer = () => {
   const getVideos = async () => {
     const response = await fetch(mostPopularVideos);
     const data = await response.json();
-    console.log("data :", data.items);
     setVideos(data.items);
   };
-  console.log("videos :", videos);
   return videos.length === 0 ? null : (
     <div className="flex flex-wrap">
       {videos.map((video, index) => (
