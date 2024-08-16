@@ -36,8 +36,6 @@ const Head = () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
-    console.log("dis :", searchQuery);
-    console.log("json :", json[1]);
     dispatch(cacheResults({ [searchQuery]: json[1] }));
   };
   return (
