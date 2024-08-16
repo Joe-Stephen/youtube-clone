@@ -22,7 +22,18 @@ const commentsData = [
       {
         name: "Joe Stephen",
         text: "Yes it is!",
-        replies: [{ name: "Shibumon", text: "No it's not.", replies: [] }],
+        replies: [
+          {
+            name: "Shibumon",
+            text: "No it's not.",
+            replies: [],
+          },
+        ],
+      },
+      {
+        name: "Dundu mon",
+        text: "It might be.",
+        replies: [],
       },
     ],
   },
