@@ -9,4 +9,4 @@ export const YOUTUBE_WATCH_URL_PREFIX = "https://www.youtube.com/embed/";
 export const YOUTUBE_WATCH_URL_POSTFIX = "?&autoplay=1&mute=1";
 export const YOUTUBE_SEARCH_API =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
-  
+export const OFFSET_LIVE_CHAT = 5;
